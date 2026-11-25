@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR8MNJG8');</script>
+  <!-- End Google Tag Manager -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Lens™ — Tracking Intelligence</title>
+  <meta name="author" content="Tapasvi Dudhrejiya">
+  <meta name="description" content="Inspect published GTM containers, public Google tag / GA4 configuration and website tracking, with evidence for every detected value.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20261008.1">
+  <link rel="stylesheet" href="assets/site.css?v=20261008.1">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR8MNJG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="dl-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="scan"></i></div>
+  <header class="dl-header">
+    <div class="dl-header-in">
+      <a class="dl-brand" href="./" aria-label="Digital Lens™ home"><img src="favicon.svg" alt=""><span>Digital Lens<sup>™</sup></span></a>
+      <nav class="dl-nav" aria-label="Tools">
+        <a href="app.html#gtm" data-mode="gtm">GTM Audit</a>
+        <a href="app.html#ga4" data-mode="ga4">GA4 Inspector</a>
+        <a href="app.html#website" data-mode="website">Website Insights</a>
+        <a href="app.html#ecom" data-mode="ecom">Ecommerce Audit <span class="dl-new">New</span></a>
+        <a href="app.html#app" data-mode="app">App Inspector <span class="dl-soon">Soon</span></a>
+      </nav>
+      <div class="dl-actions">
+        <div class="dl-profile" id="dlProfile" hidden>
+          <button type="button" class="dl-avatar" id="avatarBtn" title="Account" aria-label="Account"><img id="avatarImg" src="" alt=""></button>
+          <div class="dl-profile-menu" id="profileMenu" hidden>
+            <div class="dl-profile-info"><strong id="profileName"></strong><span id="profileEmail"></span></div>
+            <button type="button" class="dl-profile-action" id="signOutBtn">Sign out</button>
+          </div>
+        </div>
+        <button type="button" class="dl-icon" id="settingsBtn" title="Settings" aria-label="Settings"></button>
+        <button type="button" class="dl-icon dl-burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+    <div class="progress" id="progress" hidden><span></span></div>
+  </header>
+
+  <div class="dl-toolbar" id="toolbar" hidden>
+    <div class="dl-toolbar-in">
+      <form id="decodeForm" class="searchbar" autocomplete="off" role="search">
+        <label for="q" class="sr-only">GTM container or website</label>
+        <svg class="searchbar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5Zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9Z"/></svg>
+        <input id="q" type="text" spellcheck="false" placeholder="GTM-XXXXXXX or a published GTM script URL">
+        <button type="submit" id="decodeBtn" class="btn-primary">Decode</button>
+      </form>
+      <button type="button" class="dl-icon" id="pasteBtn" title="Paste container code" aria-label="Paste container code"></button>
+      <button type="button" id="backendChip" class="backend-chip" title="How this app fetches gtm.js"><span class="dot"></span><span class="label">Checking…</span></button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="sidenav" id="sidenav" aria-label="Container sections"></nav>
+    <main class="main" id="main">
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="sheet" id="sheet" aria-modal="true" role="dialog" aria-labelledby="sheetTitle" hidden></aside>
+
+  <dialog id="pasteDialog" class="dialog">
+    <form method="dialog" class="dialog-body" id="pasteForm">
+      <h2>Paste container code</h2>
+      <p class="muted">Paste a published <code>gtm.js</code> response (open <code>https://www.googletagmanager.com/gtm.js?id=GTM-…</code>, select all, copy), or a container export JSON from GTM Admin → Export container.</p>
+      <textarea id="pasteText" spellcheck="false" placeholder="Paste gtm.js or container export JSON"></textarea>
+      <div class="dialog-row">
+        <label class="file-label">Or load a file <input type="file" id="pasteFile" accept=".js,.txt,.json"></label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="btn-text" data-close>Cancel</button>
+        <button type="submit" class="btn-primary" id="pasteGo">Audit</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="dialog">
+    <form method="dialog" class="dialog-body" id="settingsForm">
+      <h2>Settings</h2>
+
+      <fieldset class="field">
+        <legend>Naming style</legend>
+        <p class="muted small">GTM doesn't publish real names, so names are built from each item's settings.</p>
+        <label class="radio"><input type="radio" name="style" value="spy"> <span><b>Clean (default)</b><br><span class="muted small">Google Ads Remarketing — AW-123456789, Custom Event — purchase</span></span></label>
+        <label class="radio"><input type="radio" name="style" value="readable"> <span><b>Plain English</b><br><span class="muted small">Meta Pixel · Purchase, Page view · URL contains /thank-you</span></span></label>
+        <label class="radio"><input type="radio" name="style" value="emdash"> <span><b>Em-dash</b><br><span class="muted small">Meta Pixel — Purchase, Page View — Page Path contains /thank-you</span></span></label>
+        <label class="radio"><input type="radio" name="style" value="convention"> <span><b>Convention</b><br><span class="muted small">Meta - cHTML - Purchase, PV - Page Path contains /thank-you</span></span></label>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Fetch proxy</legend>
+        <p class="muted small">Needed on the hosted version so the browser can read gtm.js, gtag.js and website HTML. Paste your Cloudflare Worker URL (see DEPLOY.md). Leave empty when using the local server.</p>
+        <div class="inline">
+          <input type="url" id="proxyUrl" placeholder="https://your-worker.your-subdomain.workers.dev">
+          <button type="button" class="btn-outline" id="testProxy">Test</button>
+        </div>
+        <p class="small" id="proxyResult"></p>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Google Sheets export</legend>
+        <p class="muted small">Ecommerce Audit can create the report directly as a Google Sheet in your Google Drive. It needs a Google OAuth Client ID (one-time setup, see DEPLOY.md). Digital Lens only asks for access to the files it creates.</p>
+        <input type="text" id="googleClientId" placeholder="1234567890-abc123.apps.googleusercontent.com" spellcheck="false" style="width:100%">
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Display</legend>
+        <label class="check"><input type="checkbox" id="showListeners"> Show GTM listener tags and listener-only triggers</label>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Saved data</legend>
+        <p class="muted small">Version snapshots and recent searches stay in this browser only.</p>
+        <button type="button" class="btn-outline" id="clearSnaps">Clear saved snapshots</button>
+      </fieldset>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn-text" data-close>Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="report" class="report" aria-hidden="true"></div>
+
+  <div class="dl-login-gate" id="loginGate" hidden>
+    <div class="dl-login-card">
+      <img src="favicon.svg" alt="" width="48" height="48">
+      <h2>Sign in to Digital Lens</h2>
+      <p>Use your Google account to access all audit tools.</p>
+      <div id="googleSignInBtn"></div>
+    </div>
+  </div>
+
+  <div class="dl-footer-wrap"><footer class="dl-footer">
+    <div class="fb"><img src="favicon.svg" alt=""><div><strong>Digital Lens™</strong><span>See what matters.</span></div></div>
+    <div class="fm">Built by <strong>Tapasvi Dudhrejiya</strong></div>
+    <div class="fl"><a href="mailto:dudhrejiyatapasvi@gmail.com">dudhrejiyatapasvi@gmail.com</a><a href="https://www.linkedin.com/in/tapasvi-dudhrejiya/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+  </footer></div>
+
+  <script src="js/config.js?v=20260928.7"></script>
+  <script src="js/core/catalog.js?v=20260925.1"></script>
+  <script src="js/core/parser.js?v=20260925.1"></script>
+  <script src="js/core/naming.js?v=20260925.1"></script>
+  <script src="js/core/decoder.js?v=20260925.1"></script>
+  <script src="js/core/audit.js?v=20260925.1"></script>
+  <script src="js/core/platforms.js?v=20260928.3"></script>
+  <script src="js/core/sitescan.js?v=20260928.3"></script>
+  <script src="js/core/snapshots.js?v=20260925.1"></script>
+  <script src="js/core/scan.js?v=20260925.1"></script>
+  <script src="js/core/gtmexport.js?v=20260925.1"></script>
+  <script src="js/core/inventory.js?v=20260928.3"></script>
+  <script src="js/core/ga4public.js?v=20260925.1"></script>
+  <script src="js/core/ecomspec.js?v=20260928.7"></script>
+  <script src="js/core/xlsx.js?v=20260928.7"></script>
+  <script src="js/settings.js?v=20260928.7"></script>
+  <script src="js/net.js?v=20260925.1"></script>
+  <script src="js/icons.js?v=20260925.1"></script>
+  <script src="js/analytics.js?v=20260925.1"></script>
+  <script src="js/appinspector.js?v=20260928.1"></script>
+  <script src="js/ecomhistory.js?v=20260928.7"></script>
+  <script src="js/gdrive.js?v=20260928.7"></script>
+  <script src="js/ecomaudit.js?v=20260928.7"></script>
+  <script src="js/auth.js?v=20261008.1"></script>
+  <script src="js/header.js?v=20261008.1"></script>
+  <script src="js/app.js?v=20261008.1"></script>
+</body>
+</html>
